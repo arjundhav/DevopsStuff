@@ -1,0 +1,110 @@
+VPC(Virtual Private Cloud): 
+
+- Its virtual network or data center inside AWS for a one client
+- Its logically isolated from other virtual network in the AWS cloud
+- Max 5 VPC can be created in single region & 200 subnets in 1 VPC.
+- We can allocate max 5 Elastic IP(IP's that are reserved)
+- Once we create VPC, DHCP,NACL & security group will be automatically created.
+- VPC is confined to AWS region & does not extend between regions.
+  (Its Restricted to region)
+- Once it is created we cant change CIDR block range
+
+
+# Public subnet:
+
+  - If a subnet traffic is connected to internet gateway it is known as Public Gateway. 
+
+  - It is associated with custom route table(with igw id) that has route to an Internet gateway.It connects PC to Internet & to other AWS services. 
+ 
+
+# Private subnet:
+
+  - If subnet that doent have route to internet gateway  is known as Private group.
+
+  - It is subnet that is associated with route table that doesn't have a route to an internet gateway.
+
+## Router => Establish communication betwn 2 subnets
+## Route table => holds path of communication i.e it provides 			   destination IP 
+
+
+## Security Group acts as firewall that controls traffic allowed to & from resources in your VPC.
+
+## NACL (Network Access Control List) which helps to provide a layer of security to the Amazon Web Services stack. NACL helps in providing a firewall thereby helping secure the VPCs and subnets. 
+
+## Router is used to connect Private/Public subnets internally.
+
+=====================================================================
+
+## Component of VPC:
+
+ 	- Implied router or routing table
+ 	- Internet Gateway
+ 	- SECURITY Group
+ 	- Network ACL
+ 	- Virtual Private Gateway
+ 	- Peering Collection
+ 	- Elatic IP
+
+##Flow: 
+ 	1.Create VPC
+ 	2.Subnets
+ 	3.Internet Gateway
+ 	4.Routing Table
+
+#Types of VPC: - 
+     
+1)Default Table: 
+   - Created in each AWS region when AWS account is created
+   - It has default CIDR,security group,NACL & routing table setting 
+   - AWS user has Internet Gateway(IG) by default.
+     
+2)Custom VPC:
+   - Its a VPC & AWS account owner creates
+   - AWS user creates custom VPC can decide CIDR
+   - CUstom VPC have default security group,NACL& route tables
+   - It doesnt have IG by default,we need to create if needed
+
+=====================================================================
+ 
+ ***************** Components of VPC  ***********************
+
+## Implied Router & Route Table:
+
+-Its central routing func bcoz it establish connection betwn subnets. 
+ - It connects VPC to internet gateway.
+ - You can have upto 200 route tables.
+ - You can have upto 50 route entries per route table. 
+ - EACH SUBNET MUST BE ASSOCIATED WITH ONLY ONE ROUTE AT TIME.
+ - We need to specify a subnet to route table association,else subnet will asociated with default VPC route table.
+
+
+### Internet Gateway:
+  - IG is virtual router that connects VPC to internet.
+  - IG is VPC component that allows communication btwn VPC &internet.
+  - Default VPC is already attached to IG
+  - If we create new VPC we must attach IG in order to accss internet 
+  - Its bi-directional as it manages incoming and outgoing data.
+  - 0.0.0.0.00 is by defualt igw-id
+
+# NAT gateway:  Network Address Translation Gateway
+ 
+ - NAT gateway enables internet in private subnet,but prevents it 
+   from intiating connection with those instances
+
+ - Must need to assign Elastic IP to your NAT gateway
+
+ - Deleting NAT gateway diassociates Elastic IP address,but does not 
+   release address from your account 
+
+ - NAT gateway is used to enable instances present in private subnet 
+   to help connect to internet or AWS services.
+
+ - Its uni-directional 
+
+ - NAT Gateway is present in Public subnet but works for Private 
+   subnet.
+
+====================================================================
+Computing -> EC2
+Storage => S3,EBS,EFS
+Networking => VPC

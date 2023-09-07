@@ -1,0 +1,156 @@
+
+************************* IAM(Identity & Access Management) **********************
+
+User  - It is single entity or person. We can have 5000
+Groups- It is collection of IAM users. We can have 300 grps.
+Roles - 1000
+
+  Why groups are needed?
+=>  1 Group => Access => users
+    i.e One user has access to EC2,other has access 
+
+### Root -> Admin -> IAM users
+
+Root => Most Previleged user. Can Create/Delete AWS account.
+
+Admin =>
+        - Created by Root user & will have access like root user.
+        - Admin is also IAM user.
+        - It manages IAM Users.
+
+IAM Users => 
+
+    - Shared access to your AWs account. 
+
+    - We can provide access without sharing our credentials & by creating IAM users.
+
+    - Granular Permission: Multilevel access to IAM users EC2,RDS,S3. 
+                           i.e limited access to AWS services
+
+    - Secure access to AWS resources for apps that run on EC2.
+           EC2 => S3 Bucket            => i.e resource to resource access.
+
+# Ex: If Shiv has only access to all EC2 permission then he can access or manage EC2 only.
+      But he cant mange or access other services
+      
+      If Ram has access to EC2 & S3 Bucket.
+      It doesnt mean that EC2 can create S3.
+      This is possible only if EC2 has access to that S3 Bucket.
+
+  - Even if user has access to only EC2  and full read only access but he can read 
+    any service but can access only provided permission service i.e he can see S3 
+    Buckets,EBS & all other services.
+
+
+# Single sign-on(SSO) enables users to log into multiple apps & websites with one set   
+  of credentials.
+
+
+Steps: 
+      1. Create Role with full access to EC2 & S3.
+      2. Then goto EC2 instance Actions -> Security -> Modify IAM role 
+      3. Attach that role to EC2
+      4. Test the result
+       
+------------------------------------------------------------------------------------
+
+## IAM Terms:
+
+ Federated users: All the users from Active Directory are in sync with AWS & they are 
+                  called Federated users.I.e they get populated into 
+                  aws users.
+ 
+ 1. Principal => User,Role,Federated users or app.
+ 2. Request => Principal is making reqs for authentication
+ 3. Authentication => Login Username & pwd
+ 4. Authorization => Permission to allow any work
+ 5. Action/Operation => Delete,Create or Modify.
+ 6. Resource => On which actions are performed. i.e AWS services
+
+For ex: IAM user named “Shristi” is a principal,
+        her IAM username shristi@example.com is her identity.
+
+# Principal - A person or app that uses the AWS account root user, IAM user, or an 
+              IAM role to sign in & make requests to AWS. 
+
+-------------------------------------------------------------------------------------------
+
+## Permissions & Policies:
+
+ - Policies are set of permissions. ex: S3 delete, S3FullAccess.
+ - We can assign role by converting it into policy
+ - Policies are granted through policies created & then attached to user group or 
+   roles.
+ - One IAM user or group can have multiple policies
+ - User Permissions are calculated based on combination of polices.
+
+  Ex: RAM
+       - EC2 readonly,S3 Upload
+       - EC2 fullAccess
+       - RDS readonly
+       - S3 fullAccess
+       - EC2 delete,EC2 create,RDS create
+
+  i.e RAM has EC2 fullAccess,S3 fullAccess, RDS readonly and RDS Create permissions.
+
+** scene: If we have new member in group intially he will be in readonly access group 
+          then after gaining access he will be given read & write access.
+
+
+## RecommendationS:
+ 
+  - Dont use root user for everyday access
+  - Dont't share root credentials with anyone
+  - Create IAM user for yourself & assign your adminstrative permission for your 
+    account. 
+  - You can sign-In as admin to add more users as needed.
+  - IAM user can't delete root user.
+
+---------------------------------------------------------------------------------
+
+## Resource Based Policies:
+
+ - In some cases you can attach a policy to a resource in addition to attaching it to   
+   grp/user that is called a resource based policy.
+
+ - You can explicitly list who is allowed to access the resource.
+
+----------------------------------------------------------------------------------
+
+## IAM Delegation(assign authority to other):
+  
+- It is granting permission to users to allow access to resources that you control
+
+- Delegation involves setting up trust betwn account that owns resources(trusting
+  account) & account that contains users that need to access the resource(trusted 
+  account).
+
+- To delegate permission to access a resource you create an IAM role that has    
+  policies attached:
+      1. Trust Policy
+      2. Permission Policy
+---------------------------------------------------------------------------------
+## Create Role based on Policy:
+  1.From Access Management => click Roles => Add Permissions
+  2.Click on generate Policy 
+  3.Cloud Trail Access =>an auditing,monitoring & governance tool  
+                         from AWS
+
+***You can't directly assign Role to user,but you can do it by creating policy first & then assign role ***
+
+***
+   Can we attach role to User?
+   => You can generate new policy using role, which can be then assigned to user.
+***
+=============================================================================
+
+Imp terms:
+
+ Permission: S3 Bucket - Put/Download/create/delete/versioning
+ Policy:    Set of permissions
+ Role:      Policy assigned to role
+ Principle: role is assigned to principle
+
+=============================================================================
+
+Inline policies; These apply where there is a direct one-to-one relationship between the policy and the user or group. 

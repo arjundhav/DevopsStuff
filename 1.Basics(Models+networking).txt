@@ -1,0 +1,223 @@
+A server is software/hardware device that accepts & responds to requests made over network.
+
+1) What is Racks & Blade?
+-> Rack server is used to stack & install several servers in a large closet.
+   Blade is used to insert small servers in case stacked horizontally in rack.
+
+
+2) What is OnPremise & OffPremise?
+-> OnPremise is setting DataCenter on company's premise.
+     - costly
+     - maintenance is manual
+     - More secured & max control over infrastructure & access.
+
+  On-premises private cloud management is expensive and requires heavy initial investment and ongoing expenses.
+
+  Offpremise(cloud) is not so costly,maintenance is automatic but requires some monthly fee.It gives less control over infrastructure & is accessible on any device.
+
+
+3) What is Waterfall vs Agile ?
+-> 
+ Waterfall Model:
+  - Its linear sequential lifecycle model.
+  - Determines the end goal early i.e Provides fixed plan of project from start to finish
+  - Documentation provides a clear scope to the project that helps to decide budgets & 
+    timelines.
+  - Used for small scale projects
+
+  
+  cons:
+     - difficult to customize as it works on fixed method
+     - There is no any collaboration with Client during Development.
+     - Testers report issues and bugs later in the process.
+   
+
+ Agile Model: 
+   
+  Pros:
+    - Their is continous collboration with clients
+    - easy to customize i.e more flexible
+    - encourages short-term deadlines
+    - Transparency
+
+   Cons: 
+     - 
+
+ Roles: 
+   1)Product Owner-client- represents the needs of both the customer and the business. 
+   2)Scrum Master - service company=> communicates & collaborates between leadership & team players to ensure a successful outcome.
+
+ Sprint: The repetitive process that developers use to tackle a development project 
+         it is of 14 days(2 weeks)
+
+
+AGILE MEETINGS:
+
+ Sprint Planning -1hr ->Team comes together to determine which stories will be part of current sprint.
+                         - Front,Back,Devops,DBA,Product 0wner
+ 
+ Daily standup - 15-30 min => 1.kal kya kia 2.aaj kya krne wale ho 3. prblms 
+ 
+ Demo - 1hr => stackholders->showcases working software that team completed over course of sprint.
+ 
+ Retropective - 1hr => 1. What well went
+                       2. What didn't go well
+                       3. Happiness Factor(give rating out of 5)
+
+
+SpillOver - work of one sprint goes to next sprint
+
+=====================================================================================
+
+*********************** Networking ************************************************
+4) What is OSI model?Its layers
+=>  OSI(Open Systems Interconnection) is reference model for how apps communicate over network. 
+
+   Trick to remember OSI - Please Do Not Throw Spicy Pizza Away.
+
+   3 types of layers: Software Layer +> App,Presentation and Session Layer.
+                      Hardware Layer => DataLinkLayer, Physical Layer
+                      Heart of OSI  => Transport Layer
+
+
+    Physical Layer - Bits- lowest layer - responsible for physical connection between devices - HUB
+    
+    Data Link Layer - Frame - to make sure data transfer is error-free from one node to another, over the physical layer. - Switch 
+
+    Network Layer - Packet - transmission of data from one host to the other located in different networks - Router
+
+    Transport Layer - Segment -responsible for End to End Delivery of complete message. - Firewall
+
+    Session Layer - responsible for establishment of connection, maintenance of sessions,auth & ensures security - Gateway
+
+    Presentation Layer(Translation layer) - Applicaton layer data is manipulated here & transmit over the network.
+
+    Application Layer - layer also serves as window for application services to access network & for displaying received information to user. 
+
+
+   - Pysical,DataLink and Network Layers are Hardware Layers
+
+   - Transport Layer is heart of OSI => becoz it connects hardware & software layers.
+
+   - Session,Presentation and Application Layer are Software Layers
+
+   - Framing is a function of the data link layer. It provides a way for a sender to transmit a set of bits that are meaningful to the receiver.
+
+   - Data in the transport layer is referred to as Segments. 
+
+
+=====================================================================================
+
+************************* Network Devices *****************************************
+
+     Router - Router will connect Networks -connects LAN WAN - Filters & Send Packets - 2/4/8 ports
+
+     Switch - Switch will helps connect devices -second data link layer & at times  network layer - 2 or more LAN devices - Filter before forwarding Data - Multi port between 4 & 48.
+
+     HUB -sends data packets(frames) to all devices - 2 or more Ethernet Devices (LAN) - Unable to perform Filtering - 4/12 ports  - Layer 1
+
+
+=====================================================================================
+
+******************** Internet Protocol (IP) ***************************************
+
+  A port is a virtual point where network connections start and end. 
+
+  IP(Internet protocol) address : Its classes are A B C D E.
+ 
+  IP contains 4 octets between 0 to 255.Its 32-bits.
+
+
+  Class A - 1.0.0.0 to 126.255.255.255 => used for Governments
+  Class B - 128 - 191 => Medium companies
+  Class C - 192 - 223 => Small companies
+
+
+  IP address range 127.0.0.0 – 127.255.255.255 is reserved for loopback, i.e. Host's self-address, also known as localhost address
+
+  Range of IP address: 1.0.0.0 to 255.255.255.255
+
+  IPv4:IPv4 Address Format is a 32-bit Address that comprises binary digits separated by a dot (.) => 2^32 => No encryption & Authentication.
+
+  IPv6:IPv6 Address Format is 128-bit IP Address,which is written in group of 8 hexadecimal nums separated by colon (:) => 2^128 => Encryption & Auth is provided 
+
+  IPv6 is better than IPv4 as IPv6 is more advanced.
+
+  By typing IPConfig in cmd we will get Local Device IP address.
+
+  MAC address is Physical address of device which is permenant.
+
+  Hop Count - means Multiple routers
+
+  Intranet - it gives private IP for local connection
+  Internet - it gives public IP for Public connection
+
+# Types of IP:
+
+  i) Public IP addr: Is available publicly & assigned by our network provider to 
+                    router,which is further divides to devices
+
+  ii) Private IP: It is internal addr which is not routed to internet i.e no exchane 
+                  of data between private IP and Internet. 
+               - Intranet Connectivity
+                
+ iii) Static IP => We can manually assign this IP
+           - Our Laptop IP address is Static IP coz theres no any DHCP for it.
+
+  iv) Dynamic IP => DHCP will provide this IP
+
+   v) Elastic IP => Public IP + Fixed(Reserved) -> DHCP provides it.
+               - Used in case we dont want to change IP address for our Instances
+
+
+# DHCP => Dynamic Host Configuration Protocol is protocol for automatically assigning 
+          IP addresses & other configs to devices when they connect to  network.
+
+
+TCP/IP allows computers on same network to identify & communicate with each other.
+
+ FTP(21),SMTP(25),Telnet(23),ICMP,DNS(53)
+ HTTP(80),HTTPS(443), RDP(Remote Desktop Protocol),SSH(Secure Shell)
+
+Internet Assigned Numbers Authority has assigned india port numbers 
+
+ping cmd is used to check connectivity and gives 
+
+Microsoft Terminal Services Client (MSTSC) is the command line interface to run the Microsoft Remote Desktop (RDP) client
+For windows: run/cmd ->mstc  => to connect anothr remote server (Enter ip addr)
+For linux: ssh <username>@<IPAddress/server name> 
+
+# OSI(theorotical,7Layers) vs TCP/IP(implementation of OSI,4layers)
+# OSI model is General but mostly TCP/IP is used.
+
+
+In Organizations VM is not launched using Public IP,its done using Private IP only.
+
+=====================================================================================
+=====================================================================================
+
+*************************** Repomodel *********************************************** 
+ 
+ Repo: a place or container in which something is stored in large quantities
+
+ Package: Software
+
+ JFrog Artifactory: It manages all packages,files,containers & components for use throughout your software supply chain.
+ 
+ XRay: It scans packages,files & containers, it detects security vulnerabilities & licenses in your software components.
+ 
+#Types:
+
+ LocalRepo: EC2 instance Local
+ RemoteRepo: Organization i.e jfrog. We use X-ray tool in jfrog.  
+ CentralRepo: Its Internet.
+ 
+ Jfrog:- Its repository manager that supports all available software package types, 
+         enabling automated continous integration and delivery.
+
+ It stores: Packages 
+            Docker Images 
+            Plugins 
+            Artifacts
+
+ If we want a any package we will first look into Remote Repo,if its not present here then we need to request from central repo.

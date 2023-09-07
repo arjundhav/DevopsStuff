@@ -1,0 +1,107 @@
+**************************** S3 Bucket *******************************************
+
+1. Object based storage.Objects are entities stoed in AWS S3.
+2. 3 copies of data in same egion
+3. You cant create bucket inside bucket
+4. The max capacity of bucket is unlimited i.e single obj capacity 5TB.
+5. Its global service.
+
+# Versioning: 
+
+  - Versioning in S3 is means keeping multiple variants of an object in same bucket. 
+  - S3 Versioning feature helps to preserve,retrieve & restore every version of every 
+    object stored in buckets
+  - If filename is same then only it will create versioning.
+  - Versioning-enabled buckets can help to recover objects from accidental deletion or 
+    overwrite. 
+  - We can enable or suspend versioning can't disable.
+
+# AWS ClI cmnd: 
+               aws s3 ls => lists bucket
+               aws s3 mb s3://Arjun => create bucket Arjun
+               aws s3 rb s3://Arjun => delete bucket Arjun
+               aws s3 sync . s3://bucketName
+               aws s3 rm s3://bucketname --recursive => Delete bucket objects
+
+# AWS DataSync is a secure, online service that automates and accelerates moving data between on premises and AWS Storage services.
+
+     >> aws s3 sync . s3://<bucket-name>
+
+
+# Storage Classes of S3:
+
+1. Amazon S3 Standard(By Default it is selected)
+
+ - S3 offers high durability,availability & performance object storage for frequently    
+   access date.
+ - Durability is 99.9999999999%
+ - Availability - 99.99%
+ - Support for SSL.(secure socket layer)
+ - Its storage cost for object is high,but there is very less charge for accessing object.
+ - Largest object that can be uploadedd in a single PUT is TB.
+
+2. Amazon S3 Standard-Infrequent Access
+
+ - It is for data that is accessed less frequently, but requires rapid access when needed.
+ - Storage cost is much cheaper than S3-std i.e half the price,but you are charged more    
+   heavily for accessing your obbjects.
+ - Durability is 99.9999999999%
+ - Availability - 99.9%
+ - Data that  is deleted from S3-IA within 30 days will be charged for a full 30 days.
+
+3. Amazon S3 Intelligent Tiering
+
+- The S3 Intelligent Tiering storage class is desined to optimize cost by  automatically 
+  moving data to the most cost effective access tier.
+- It works by storing objects in two access tiers.
+- If an object in frequent access tier is accessed, it is automatically moved back  to        
+  frequent access tier.
+- There is no retrieval fees when using S3-intelligent tiering storage class and no 
+  additional tiering fee e=when object moved between access tiers.
+- Same low latency and high performance of S3-std.
+- Object less than 128kb can not move to IA.
+
+4. Amazon S3 One Zone-Infrequent Access (S3 One Zone-IA)
+
+- S3 one-zone is for data that is accessed less frequently, but required rapid access when    
+  added.
+- Data store inn single AZ.
+- Ideal for those who  want lower cost option of IA-Data.
+- It is good choice for storing secondary backup copies of on-prepmise data or easily re-
+  creatable data.
+- Durability is 99.9999999999%
+- Availability - 99.5%
+
+5. Amazon S3 Glaicer
+
+- S3 Glacier is a secure, durable low cost storage  classs for data archiving.
+- Designed to retain historical data for long periods.
+- To keep cost storage low you can use S3 Glaicer.
+- You can upload object directly to glacier or use lifecycle policies
+- Durability is 99.9999999999%
+- Support for SSL.
+- You can retrieve 10GB of you S3 glacier data per/month for free with free tier account.
+- Retrieval will take time of 2 to 4 hours
+
+6. Amazon S3 Glaicer Deep Archive
+
+- Cheapest storage.
+- Designed to retain data for long periods. eg 10yrs
+- All objects stored in S3-Glacier Deep archiev are replicated in 3 AZ.
+- Ideal alternative to magnetic tape libraries.
+- Retrieval time withinn 12 hours.
+- Storage cost is upto 75% less than S3-Glacier.
+- Durability is 99.9999999999%
+- Availability - 99.9%
+
+# To change storage class: Select Object ->click Action ->Edit Storage Class ->Select Class 
+
+# In case we have thousands of object we have to set life cycle rules: 
+           It is done to move a object from 1 storage class to another.
+  
+ Ex: S3 Std -> S3 Std-IA ->  
+       0          30      
+
+# Multi part uploading: I want to copy a large file to an Amazon Simple Storage Service (Amazon S3) bucket as multiple parts.     
+   
+=========================================================================================

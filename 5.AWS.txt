@@ -1,0 +1,285 @@
+# AWS: Its public cloud
+
+# Region: Group of Data centers => us-east-1
+
+# Availablity Zone: Data Center => us-east-1b
+                  (If theirs alpha at end its zone) 
+
+
+Region is selected based on client location.It is selected based on below factors :
+
+# Latency - A major factor to consider for user experience is latency(measures 
+            delay in packet's arrival between client-server in mmsec).
+ 
+# Cost- AWS services are priced differently from one Region to another.
+
+# Services&features- New services&features are deployed to Regions gradually.
+
+ If we want to get exact billing for AWS services then visit https://calculator.aws and get a estimate for service required.
+
+# AWS Command Line Interface (AWS CLI) is a unified tool that provides a consistent interface for interacting with all parts of Amazon Web Services.
+
+# 2 ways to login into console:   Root User     &    IAM User
+                                  previleged          managed by Root user
+
+# Access types: 
+
+   1.Console Access => UserID,Password
+   2.Programatic Access(AWS CLI) =>TerraForm
+
+===================================================================================
+
+## AWS CLI: Also known as Programmatic Access
+
+- ACCess Key & Secret are imp for AWS CLI
+   
+  Steps to connect AWS CLI:
+   
+   In CLI run command: aws configure
+       
+     AWS Access Key ID [None]: 228881833629
+     AWS Secret Access Key [None]: Enter access or create one by : IAM => AccessMgmt
+     Default region name [None]:
+     Default output format: JSON
+
+   - Cmd to check version: aws --version
+===================================================================================
+
+***************************** AWS Backup ********************************************
+
+There are 2 types of backups:
+  i) Ondemand - Manual Backup
+ ii) BackupPlan - Auto Backup
+
+# Backup of EC2:
+
+  Type:
+      1.On Demand - manual backup
+  *** 2.Backup Plan - Taking Backup weekly on every saturday generally at 10am. 
+                      2 week retention period
+ 
+ 
+  1. Backup Vault - It is container that stores and organizes your backups.
+ 
+  2. Retention Period - tells for how much time backup needs to be stored.
+
+# Backup vaults: 
+
+ - Backup vaults are storage locations for backups. 
+ -You can create multiple backup vaults in different regions & assign backup rules to them.
+
+# Backup policies: 
+
+   Backup policies define backup plan schedule,which specifies when backup jobs should run. 
+   You can create multiple backup policies & apply them to different resources.
+
+# Steps to Create a Backup Vault:
+
+  i)AWS Console,Select AWS Backup service from list of available services.
+ ii)Click on “Create Backup Vault” to start the creation process.
+iii)Provide a unique name for the backup vault.
+ iv)Choose the AWS region where you want to create the backup vault.
+  v)Choose an encryption setting for backup vault. 
+    We can use default AWS Key Management Service(KMS) master key/create custom KMS key.
+ vi)Review backup vault details and click “Create backup vault” to complete the process.
+
+# To delete vault we need to delete first recovery point.
+
+=====================================================================================
+
+******************************* Elastic IP address **********************************
+
+  - It is public static IPv4 address designed for dynamic cloud computing.   
+
+  - It is allocated to your AWS account & is yours until you release it.
+
+  - If your instance does not have a public IPv4 address, you can associate an 
+    Elastic IP address with your instance to enable communication with the internet.      
+    Ex: this allows you to connect to your instance from your local computer.
+
+  - Elastic IP is assigned after instance is stopped,thus charges only after EC2 is stopped
+
+# USECASE: As we know whenever we restart EC2 instance it Public IP changed everytime.
+           If there is any imp EC2 machine and we dont wanna lose its public IP in such 
+           case we use Elastic IP
+
+# Steps to associate Elastic IP ( EIP ) address:
+ 
+ Goto, Network & Security -> Elastic IPs ->Allocate addr
+   
+   i)Select the Elastic IP: Select new created Elastic IP addr by clicking on checkbox 
+  ii)Associate Elastic IP with Instance:For EIP Actions-> choose "Associate IP addr.
+ iii)Choose the Instance: Select instance that you want to associate with Elastic IP.
+  iv)Confirm and Verify Association of Elastic IP
+
+Now, your instance should have static public IP address & Elastic IP associated with it, which will remain same even if you stop and start instance. This can be useful when you need consistent public IP address for services like hosting a website or setting up remote access.
+
+=====================================================================================
+
+*************************** A W S Storage *******************************************
+
+1.S3(Simple Storage Serice)is ObjectBasedStorage 
+  - For multiple users
+  - Google Drive 
+  - It’s more of a write once, read many times use case.
+
+2.EFS(Elastic File sharing/service/system) 
+   - It is like Linux NFS(Network File Sharing)
+   - for multiple linux VM's
+
+3.Glacier - low-cost cloud storage service for data
+          - secure and long term 
+          - with longer retrieval times offered by Amazon Web Services (AWS).
+    -Eg: Legal documents or long-term backups that don't require immediate access.
+
+4.Snowball -
+    - Its hardware Easily migrate terabytes of data to cloud without limits in 
+      storage capacity or compute power.
+
+    - Use case: Move databases,backups, archives, healthcare records, analytics 
+                datasets, IoT sensor data and media content to the cloud 
+
+    - Especially when network conditions are limited.
+
+5.EBS(Elastic Block Storage) - Its only for one VM
+ - It provides block level storage volumes for use with EC2 instances.
+ - Data is persistent.
+ - Auto recovery
+ - Block storage systems support random read/write operations
+
+6.Instance Storage => 
+     - Its temporary block storage service provided by AWS.
+     - Data is non-persistent 
+
+===========================================================================================
+
+
+===================================================================================
+ENV - its space where we work
+
+ 1.Development Env(Dev) => This is where developers work on writing & testing code. 
+    
+    - It's typically local setup on their own computers or shared development server. 
+    - It allows developers to experiment, debug & collaborate without affecting main 
+      app or system.
+
+ 2.User Acceptance Testing(UAT) => 
+    
+    - Its phase where software is tested by end-users to ensure it meets business 
+      requirements & functions correctly. 
+    - All issues found during UAT are addressed before software is released to   
+      production.
+ 
+ 3.Production Environment(Prod) =>
+    - It is where final version of the software or application is deployed & made 
+      available to users.  
+
+
+====================================================================================
+
+## CIDR (Classless Inter-Domain Routing): -supernetting
+
+ - This is an alternative to older subnetting
+ - CIDR is a method for allocating IP addresses for allocating IP or data routing 
+   efficiency.
+
+#Benefits:
+ - Reduce IP address wastage
+ - Create supernets flexibly
+ - Transmits data quickly-allows routers to organize IP addrs into multiple subnets
+
+ for ex:  192.168.10.0/25
+
+Decimal:      255         255          255          0
+Binary:    11111111     11111111     11111111    00000000
+Octet:         8            8            8           1
+ 
+-  How to find no of network?       - subnet
+   => 2^n  (n is total no.of.bits borrowed from host)
+      2^1 = 2
+
+- How to find no.of.Ip address on each network?
+  => 2^n  (n is total no.of.host bits)
+     2^7 = 128  (n= 8-1 =7) 
+
+- In every network,1st IP is reserved for network ID and last IP addr is reserved for 
+  broadcast ID
+
+- How to find no.of.host in each network?
+ => 2^n - 2 = 128 - 2 = 126
+
+  192.168.10.0 - Network ID
+  .
+  .
+  192.168.10.127 - Broadcast ID
+
+# AWS reserve 5 IPs  thus ideally CIDR uses 16-28 as range 
+
+
+==============================================================================
+
+********************** Virtual Private Cloud (VPC) *******************************
+
+ - VPC is a private space hosted within the cloud. 
+ - It allows private section of internet just like having own network within large 
+   network
+ - Every aws user when creates an account, AWS will create a default VPC for user.
+   But this VPC is just to start AWS.Further we need to create VPCs for our projects 
+   manually
+ - It allows your organization to provision workloads in an isolated & secure env. 
+ - It uses CIDR IP addrs when it transfers data packets between connected devices.
+
+ Components of VPC: 
+
+ - Internet gateway: It decides who can connect public subnet at Instance level.  
+                     Like Web Server EC2.
+
+ - NAT gateway: It decide who can connect private subnet.Like DB Server EC2
+
+ - Implied Router & Route tables: 
+===================================================================================
+
+Hands On needed for:
+
+ - IAM users, policies, and roles
+ - EC2 instances
+ - Security Groups(SG) => virtual firewall for your EC2 to control incoming & 
+                          outgoing traffic.
+
+ - Elastic Block Storage (EBS)
+
+ - Elastic Load Balancer(ELB)=> distributes incoming app traffic & scales resources 
+                                to meet traffic demands.
+
+ - Relational Database Service (RDS)
+
+ - Simple Storage Service (S3) — Standard storage class
+
+ - DynamoDB
+
+ - AWS Lambda
+
+ - AWS CloudWatch
+
+ - Virtual Private Cloud(VPC)
+
+ - AWS CloudFormation - helps to automate process of creating,configuring & managing   
+                        AWS resources.
+
+ - AWS Elastic Beanstalk
+
+============================================================================= 
+
+
+# Subnetting: It is a logical subdivision of an IP network.
+   Class A - 10.10.0.1 - 255.0.0.0 
+   Class B - 172.168.100.5 - 255.255.0.0
+   Class C - 192.168.100.5 - 255.255.255.0
+
+     where 255 is network id & 0 is host ID
+
+- Unicast:   Data is sent to a single recipient	
+  Multicast: Data is sent to a group of recipients   
+  Broadcast: Data is sent to all recipients in a network
+
+-------------------------------------------------------------------------   

@@ -1,0 +1,567 @@
+
+#TIPS to study:
+ 
+   MUST =>
+   SHOULD KNOW =>
+   GOOD TO KNOW =>
+
+Kernal: Linux kernel is the core part of the operating system. 
+        It establishes communication betwn devices & software. 
+        It manages system resources.
+        Every OS has Kernel.
+        Its heart of Linux
+
+Linux: Its Open Source OS like other OS MS Windows,Apple MAC,Google Android.
+
+Why linux is better than other OS:
+ - Open Source & Free of Cost
+ - More Secure(Bcoz of these features SE-Linux & ACL(Access Control List))
+ - Lighweight
+ - Stablity
+ - Performance
+ - suitable for Programmers
+ - Multi-tasking & multi-desktop support
+ - Community Support
+ - Linux requires less disk space for new installations than Windows.
+
+Disadvantages:
+ - no GUI
+ - User-friendly
+
+Types of Linux:
+ 
+ Ubuntu 
+ Fedora
+ Redhat => paid is support by RedHat
+ Kali
+ Cent oS => copy of RedHat but no support => Free of cost
+ Amazon Linux => support by Amazon => Free of cost => It takes more time than linux 
+                           to boot coz it provides additional pre-installed Softwares
+
+Text Editor (gedit) is default GUI text editor in Ubuntu operating system. 
+
+Vim is a free and open-source, screen-based text editor program.It is Unix Editor
+ 
+Terminal - Its text-based utility of computer in which by typing commands we can manipulate files,execute programs and open documents.
+
+In windows we say Folder - Directory in Linux
+We say admin in windows - root in Linux.
+
+
+/var => Logs 
+/bin => binary files
+/etc => Configuration files
+/usr =>
+
+==================================================================================================== 
+ 
+ ****************************  File Management Commands   ***********************************
+   
+   /    - root directory
+  clear - clear terminal
+  cd -  change directory
+  pwd -  print working directory /present working directory
+  ls -  listing files and folders
+  mkdir filename - create a file 
+  chmod, fchmod - change permissions of a file 
+  
+  cd . = remains in current directory
+  cd .. = one directory back
+  cd / = send to root directory
+  cd ~ = navigates to root home directory
+  mkdir -p = to create a folder within folder
+  mkdir .a = to create hidden folder
+  rmdir filname = to delete folder
+  rm -rf filename = if theres folder withun folder we can forcefully delete it
+  history = this cmnds gives a all the cmnds we used today as a list
+
+  ls /folder/ => can list files of any folder even not in their directory
+  ls -i => Display File Index Number 
+  ls -a => list all files including hidden files
+  ls -h => Lists files in HumanReadable Format
+  ls -t => sort by time & date (View last edited file)
+  ls -r => List all the files in reverse order.
+  ls -l => list with long format - show permissions.
+  ls -lh =>to Display File Size in Human Readable Format
+  ls -lrt =>long format list(size,date) which is reverseSorted By
+            Modificationtime 
+  ls -lrta => to view hidden file as well(file that have . at start is hidden)
+  ls -lrtah => view list in human readble format 
+  ls -ltr => Display Reverse Output Order by Date 
+
+===========================================================================================
+
+ ***************************** CMD for files *********************************** 
+
+  touch file1 => creates empty file
+  touch file{2,3} => create multiple files at once i.e file2,file3
+  vim file1 => to create or edit new file
+  cat file1 => to read file on console
+
+  # In vim editor: shift + i =>insert mode
+   
+  # To escape this mode: 
+    press "esc" then press "shift + :wq!" then press enter to save content.
+
+  #If we want to delete a line: Escape insert mode and press dd
+   Here,
+        :quit => Quit
+        :w	=> Save
+        :w fname => Save as fname
+        :wq => to write(save) and quit the file.
+
+   cp => copy files
+   mv => move & rename (mv source destination)
+
+## copy files: 
+
+   cp filename /destination/
+   cp f1 f2 f3  /folder2/ => copy mltiple files
+
+## move files:
+    mv filename /destination/
+    mv f1 f2  /folder2/
+
+## To rename file: mv oldNamefile NewfileName
+
+## Search Files:
+
+  find . -name "*.txt" => lists all txt files
+  find . -name "batch.txt" => finds exact file that matches name
+  find . -name "batch*" => finds all files with name starting with batch
+
+************************************************************************************
+
+## File Content CMNDS: SHOULD KNOW
+
+  # head filename => displays only first i.e old 10 lines of the file specified
+      >> head [OPTIONS] FILES
+      >> head -n 5 numbers.txt   =>first 5lines of files will be printed
+  
+  # tail filename => displays latest(new) 10 lines of file.
+      >> tail [OPTIONS] FILES
+      >>  head numbers.txt   =>latest 5lines of files will be printed
+
+  # more => As 'cat' command displays the file content. Same way 'more' command also displays the content of a file. Only difference is that, in case of larger files, 'cat' command output will scroll off your screen while 'more' command displays output one screenful at a time.
+   
+   less =>
+ 
+*************************************************************************************
+
+## File Permissions CMDs: MUST KNOW
+
+# d  rwx   r-x     r-x   :-  d =>directory r =>read w=>write x=>execute
+    owner group   other                         4          2      1   
+            of    
+          owner
+     7      5        5
+    
+# BY DEFAULT EVERY NEW FILE HAS " 755 " AS PERMISSION 
+
+# To change these permissions: chmod -R 777 snap  => Here -R is recursively
+
+ex: rw    r    r  => If we do chmod -R 755 i.e itn will be  chmod -a rws
+     6    4    4        " rwx  r-x  r-x"
+                           7     5   5
+
+
+# chown cmd is used to change the file Owner or group.used to change ownership
+Syntax:  
+      chown [OPTION]… [OWNER][:GROUP] FILE…
+      chown ubuntu file1
+
+
+# sudo <cmnd> : Sudo stands for "super user do" and it allows permitted user to execute command as the superuser i.e root privileges.
+
+===========================================================================================
+
+ *****************************  User Management CMNDS  ********************************
+
+   If we want add user with new hom directory ,new group pass, full name,
+   Room num,contact num.Then use : adduser <username>
+   
+   id => checks the user
+   useradd <UserName> 
+   passwd <Username> =>  then further type password 
+   su <username> => switch user and enter password
+   sudo -i  => login as root user
+   userdel <username> 
+ 
+  The /etc/group file is text file that defines groups on the system.
+  Every group has unique ID listed in "/etc/group" ,with groupName & members.
+  
+       " When we create User,Linux creates Group as well "
+   " Every User Must be associated with atleast one group or many "
+  
+  Group has same name as that of user: Om(user) -  Om(Group)
+  All these are in /etc which is configuration file
+
+   cd /etc/passwd => Info about users
+   cd /etc/group => Info about groups
+   cd /etc/gshadow => keeps information about the group administrators 
+
+  First goto cd/etc/ then:
+ 
+   groupadd <Gname>
+   cat group   => To view groups.
+   cat passwd => TO view users
+   groupdel <group>
+
+ Suppose we have 2Groups Devops(1003) & AWS(1004) with 2 user groups Ram & Shyam.Now to add ram in Devops and Shyam in AWS.
+ 
+   >> usermod -g 1003 Ram
+   >> su Ram
+   >> id
+
+   >> usermod -g 1004 Shyam
+   >> su Shyam
+   >> id
+
+ Now we can delete user by groupdel not by userdel as its by linux
+
+   >> groupdel <Shyam>
+
+ #To view members of group: apt-get install member -y 
+
+   root@ip-172-31-91-160:~# su Ram
+   
+   $ id
+
+       uid=1001(Ram) gid=1002(devops) groups=1002(devops)
+   
+   $ exit
+   
+   root@ip-172-31-91-160:~# members devops
+       Ram
+
+======================================================================================
+
+ **********************  Networking CMDs  *****************************
+ 
+ hostname -i => Find IP address
+
+ ifconfig => Find IP address i.e private IP address of your interfaces
+
+ ifconfig eth0 => to get ethernet port i.e Enable eth0 interface.
+
+ traceroot => It prints route that a packet takes to reach the host.
+              To use this we need to install traceroute apt install traceroute
+
+
+ In company we need to end screenshot of this cmnd output to client or network team.
+
+ tracepath <domain> => gives path of domains.
+
+ ping <destination> => PING sttands for Packet Internet Grouper.
+    It is used to check network connectivity among host & server 
+    i.e data about packets(uses Port 1 with ICMP).
+    It takes URL or IPaddress as input.
+  Use this cmnd to check internet conection is present or not using this cmnd.
+    
+    Ex: To get outut of 5 datapackets using ping -c 5 www.google.com.
+
+
+ netstat -a  or ss => Network Statistics
+
+ dig <domainname> => Info about domain
+
+ nslookup <URL> => used for querying the Domain Name System (DNS) records
+   ex: nslookup -type=ns <URL> => Get the name server (NS records)
+
+ locate <file> => gives address of file.Used only if we know the exact file
+
+ man => manual i.e gives info about the command
+
+    "  All the commands are in " sbin " directory  "
+
+===========================================================================================
+
+    *****************************  Package CMDs *****************************
+
+   YUM (Yellowdog Updater Modified)=> Amazon Linux,RedHat,CentOS
+
+   APT(Advanced Packaging Tool) => Linux
+
+ Update: It fixes issues and replace old data with new.Its free.
+ Upgrade: Adds additional features to our package.Its not free
+
+ 2.89.9 => 2 is Major Version
+          89 is Minor Version
+           9 is Patch
+    
+# APT:
+
+   sudo apt update -y =>  upgrade the system with the latest releases
+
+   sudo apt-get check => checks if any packages available for update
+    
+   sudo apt install vsftpd -y => install a particular package
+
+   sudo apt remove vsftpd -y =>  remove a particular package
+
+   sudo apt list => to get a combined list of all the packages
+
+   sudo apt info vsftpd => find out detailed info about a specific pkg
+   
+   sudo apt upgrade -y => to upgrade packages
+
+
+# YUM: package management tool
+  
+  yum check -update
+  yum install <appname> -y
+  yum remove <appname> -y
+  yum list all
+  yum info <AppName>  
+  yum clean all  => clean cache
+  yum upgrade <app> -y
+  yum repolist all => to view all repolist
+ 
+  yum list installed | grep "package" => to check whether pkg is installed or not
+
+===========================================================================================
+
+   ******************* Services ******************************
+  
+  yum install nginx -y
+  
+  systemctl status nginx => To check status of service
+  systemctl start <servicename> => To start service
+  systemctl restart <servicename> => To restart service
+  systemctl stop <servicename> => Stop the service
+  systemctl enable <servicename> => it will start service at boot.
+ 
+ So if you want a service to start now and on every reboot then you need to both enable and start the service
+
+ Similarly we can disable it.
+ 
+To view Nginx configuration files: root => cd var => cd log/ => nginx
+ 
+# init 0: command to stop the server
+# init 6 : restarts the system
+
+# whoami => tells logged in user
+# uname => tells machine which is running
+# uname -a => tells Architecture
+# uname -r => Tells info of kernel
+
+# free -h => used ram details is shown
+
+==========================================================================================
+
+           ***********   Important Linux Cmnds  **********
+
+# df -h => cmnd to check disk space info
+
+# df -i => to check inode number info   
+
+# du  => cmnd to check disk usage
+
+# mount =>
+
+# mail -s  "<Subject>" <recipent address> => cmnd to send email from linux server it requires SMTP configuration.
+
+# ps -aux  => it tells status of process(running programs). (aux prints process)
+
+# kill -9 <process id>  => forces to stop the process immedietely  (-9 is signal option)
+
+# wget <url of content to download> =>  cmnd that lets you download files  from web.
+
+# curl => cmnd to transfer data to or from a server
+
+# w => cmnd to show who is logged on and what they are doing
+
+# diff f1.txt f2.txt => cmn to compare the different files to print their difference 
+
+# uptime =>It shows how long system has been up,number of active users & load avg.
+
+# top => cmnd to show the processes and their details i.e  memory pid  priority avgLoad.
+
+   ex : If load avg : 1.20   2.10     1.90   => in percentage format 120,210   190
+                      1min    5min    15min
+
+# tree => displays tree structure begining with current diectory 
+
+# mount => mount command allows users to mount i.e. attach additional child file systems to 
+           a particular mount point on the currently accessible file system.
+      
+   ex:      mount  [device]   [dir]
+       sudo mount /dev/sdb1 /mnt/media
+
+# fdisk => fdisk is a menu driven command-line utility that allows you to create & manipulate partition tables on a hard disk.
+
+# /etc/shadow is a text file that contains information about the system's users' passwords
+
+==========================================================================================
+
+   ***************************   Filter cmnds   ******************************* 
+  
+ # CUT => 
+     cmnd for cutting sections from each line of files & writing result to standard output. 
+     It can be used to cut parts of a line by byte position, character and field. 
+ 
+     Cut using field:option is useful for fixed-length lines
+           
+            cut -d ' ' -f2 filename       
+    
+         where    -d => delimeter i.e to delimit data " ", "," , "/"
+                  -f => field number
+  
+     Cut using byte position : To extract the specific bytes,
+        
+                 cut -b 1,2,3 filename (for byte 1 2 3)
+                 cut -b 1-3,4-6 filename (for range)
+
+   
+   # grep(GLobal regular expression Print): 
+                  
+                   cat <filname> | grep <word>
+                   cat <fname> | grep -i <word>  (not case sensitive)
+    
+       #Diff between grep and find=> grep is used to find words while find is for string
+  
+   # comm f1 f2 => compares 2 files and returns comman data.
+
+   # echo "HEllo" => prints given line
+
+==========================================================================================
+
+   *************************** sed(stream editor) ********************************
+    
+    It performs lots of functions on file like replace,insertion or deletion.
+     
+        g => global action
+        s => substitution
+        d => deletion
+       -i => option is constant (when you are making in file changes) 
+
+
+   ## wc <filename> => returns number of lines, word and alphabets
+   ## wc -l <fName> => returns no.of.line
+   ## wc -w <fName> => returns no.of.words 
+           
+   ## Replace => 
+           sed -i 's/unix/linux/g' file.txt => replace word “unix” with “linux”.
+           sed -i 's/unix/linux/2' file.txt => replaces second occurance of pattern
+           sed -i 's/unix/linux/g' file.txt => replaces for all occurances 
+
+     if you want to change content of specific line num, then you can add numeric value       
+      with “s” letter for instance:
+           
+              $ sed -i ‘2s/old/new/’ file.txt
+              
+     Ex: Line3:  AWS AZURE CGP
+
+     sed -i '3s/AWS/Azure/' f1.txt =>From 'f1' line3 word 'AWS' will be replaced by Azure
+        >> AZURE AZURE GCP
+
+     sed -i '3s/Azure/AWS/1' f1.txt=>From 'f1' line3 word 'Azure' will be replaced by AWS
+        >> AWS AZURE GCP      
+
+     
+   ## Delete => 
+             sed "nd" f.txt   => Delete a particular line where n is line number
+             sed "$d" f.txt   => Delete last line
+             sed "3,6d" f.txt => Delete lin from range 3 to 6
+             sed '/pattern/d' f.txt => Delete pattern matching line
+             sed -i ‘2!d’ examp.txt => delete all lines except line number “2”
+
+==========================================================================================
+
+## AWK => Its scripting language & is used for text processing. 
+          It is used for manipulating data and generating reports.  
+     
+        awk '{print $0}' <filename> => Displays all file content
+        awk '{print $1}' <filename> => Displays first column
+        awk '{print $1,$4}' <filename> => Displays column 1 and 4
+        awk '{print $NF}' <filename> => display lasy column
+        
+        ls -lrt | awk '{print NR,$NF}'
+
+  NR: NR command keeps a current count of the number of input records.
+    If you would like each line to have a line-number count, you would use the NR built-in variable:
+  NF: $NF which represents the last field in a record:
+
+==========================================================================================
+## Linux Inode number: It is a uniquely existing number for all files in Linux.
+
+## Inode content => It is data structure containing metadata of file.
+
+## HardLink =>
+   - Each hard linked file is assigned the same Inode value as the original.
+   - Therefore they reference the same physical file location. 
+   - Hard links are flexible & remain linked even if original or linked files are moved
+   - If original file is removed then the link will still show the content of the file.  
+   - Even if we change filename of original file then also hard links properly work.
+   - ln  is used for hard link
+   - ls -l => shows all the links with the link column shows number of links.
+  
+           >> ln  [original filename] [link name] 
+   >> cd ~
+   >> mkdir myfile
+   >> ln myfile hardlink_myfile
+   >> ls -lrt
+
+   Now if we edit content of myfile it will reflect the changes in hardlink_myfile.
+   Even if we delete myfile, hardlink_myfile doesnt get deleted.
+    
+
+## SoftLink => 
+     - It is virtual location of file.
+     - Each soft linked file contains separate Inode value that points original file
+     - It is similar to the file shortcut feature which is used in Windows 
+     - Removing soft link doesn’t affect anything but removing original file
+       the link becomes useless link which points to nonexistent file.
+     - If we change name of original file then all the soft links for that file   
+       become worthless now.
+
+      command: ln  -s [original filename] [link name] 
+
+      >> ls -lrt
+      >> ln -s myfile softlink_myfile
+      >> ls -lrt
+         
+       lrwxrwxrew 1 root root date time filename => here l is for link.
+    
+   Now if we edit content of myfile it will reflect the changes in hardlink_myfile.
+   If we delete myfile, hardlink_myfile content will get deleted.
+
+
+==========================================================================================
+
+tar command => tape archive(tar) is used to create Archive and extract the Archive files.
+  
+  Syntax:
+          tar [options] [archive-file] [file or directory to be archived]
+
+  Options:
+
+     -c : Creates Archive 
+     -x : Extract the archive 
+     -f : creates archive with given filename 
+     -t : displays or lists files in archived file 
+     -u : archives and adds to an existing archive file 
+     -v : Displays Verbose Information 
+     -A : Concatenates the archive files 
+     -z : zip, tells tar command that creates tar file using gzip 
+     -j : filter archive tar file using tbzip 
+     -W : Verify a archive file 
+     -r : update or add file or directory in already existed .tar file 
+
+   >> tar -czvf samplefile.tar.gz sample file
+   >> tar -x samplefile.tar.gz
+
+ Archeive: Archive files are used to collect multiple data files together into a single file for easier portability & storage, or simply to compress files to use less storage space. 
+
+==========================================================================================
+# how to check log in lInux? 
+ => goto /var then check the file of log we need then type cmnd:
+        tail filename.log | grep error   => to find errors 
+     
+# Thread in Linux:
+  
+
+# Zombie Process: 
+   It is a process that has completed execution but still has an entry in  process table.
+ You can kill it using the command "kill PID" where PID is the process ID of the zombies process.
+ 

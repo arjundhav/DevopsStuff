@@ -1,0 +1,284 @@
+
+ ************************* AWS EC2 ******************************************
+ 
+- An EC2 instance is simply a virtual server in Amazon Web Services
+- EC2 is region based service. If its created in eg. Virginia it will work only for that region not other. i.e it is limited to region.
+
+# EC2 Pricing Option: O R S D
+
+  1. On Demand =>Here,we create or terminate instance whenever needed as per use. 
+  2. Reserved =>Here create EC2 instance for about 3-5 years with termination.
+  3. Spot Pricing =>We pay Spot price that's in effect for time period of running instance
+                  - whenever price rises instance gets terminated.
+                  - Generally used for testing purpose 
+                  - Spot Instances allow you to bid on unused EC2 capacity and pay by hour. 
+  4. Dedicated =>We can have EC2 instances that are dedicated to single customer.($2/hr )
+
+# Free Tier Pricing: 
+	free tier - 12months free - 750hrs per month(usage)
+	Configure storage - 30GB(1Windows)/(4 Linux) for month
+	Volume for windows - 30GB
+	Volume for Linux - 8GB
+
+Volume is different for them because Windows require more  graphics than Linux.
+
+Instance Type - only t2.micro is free with 1GB vCPU.For other you have to pay.
+
+If you have 2 EC2 machines,then 750/24=31.25 -> 31.25/2=15.625
+ i.e So you can use it for 15days.
+
+If 2 EC2 - Linux and windows. So 8GB for Linux & Windows(30GB) that means its 30+8=38GB.So we have to pay for extra 8GB as we have only 30GB free for month.
+
+EC2 Instance Families: Are for CPU configurations of machine.
+
+1 same Key-pair can be used for windows as well as Linux.
+
+i)General Instances(t2.micro,t3.micros and m5) - 
+   - Balanced compute,memory,network resources
+   - Used in Development Env 
+
+ ii)Compute Optimized(c5,c6g):
+   - Computationally intensive workloads required for high performance
+
+iii) Memory Optimized instances(r5,z1e)-
+  - Memory intensive workloads
+  -For e.g Gaming
+
+iv) Accelerated Memory Computing(p3,g4) -
+ - Specialized hardware accelerators such as GPU(Graphic Processing Units)
+
+ v) Storage optimized(i3,d2) -
+   - High Speed,low latency storage
+   - DataWare house 
+
+#There are multiple ways to create EC2 using:
+   - AWS Console
+   - AWS CLI
+   - Terraform - Programatic Access
+   - Ansible
+   - AWS Cloudformation: It helps to automate process of creating,configuring & managing 
+                         AWS resources.
+
+
+# Steps to launch EC2 :
+ 
+    i) Click on launch instance
+   ii) name & tags -> Name of EC2
+  iii)App and OS Images(Amazon Machine Image)
+        - Windows
+         -AMI(Windows Server 2022)
+   iv)Instance type -> t2.micro
+    v)Key Pair(login)
+        - Create new pair => aws batch 20
+   vi)Network Settings
+  vii)Configure storage
+ viii)Click on launch instance 
+   iX) When 2/2 check is done we can launch instance following further steps.
+
+# 2/2 Check:
+    Step1 - System check
+    Step2 - Instance check
+
+# Tag => Tags can help you manage, identify, organize, search for, and filter resources.
+         Tags enable you to categorize your AWS resources in different ways, 
+          - for example, by purpose, owner, or environment.
+
+# AWS Policy:
+
+  1.Without tag their is no deployment of EC2 Instance
+  2.We dont allow deployment of EC2 Instance on Public IP as its not safe.
+
+------------------------ Create EC2 using CLI ----------------------------------------
+ 
+  a. Install AWS CLI 
+  b. Authenticate using access key and security key
+  c. Get AMI id
+  d. Choose instance type 
+  e. key pair ( create new one )
+  f. Get security group id 
+  g. subnet id 
+
+cmnd: aws ec2 run-instances --image-id ami-xxxxxxxx --count 1 --instance-type t2.micro 
+      --key-name MyKeyPair --security-group-ids sg-903004f8 --subnet-id subnet-6e7f829e
+
+
+# Terminate EC2 using CLI: aws ec2 terminate-instances --instance-ids <id>
+
+
+===================================================================================
+
+*********************** AMI(Amazon machine Image) ***************************
+
+- We can use AMIs to launch instances when we require instances with different configurations.
+
+- If want install certain packages on 'n' No.of.VM's. In such case we will create AMI(Amazon Mahine Image) which will have all the required packages  we wanted to Install.Using this AMI we will create VM.
+
+- You can copy an AMI within the same AWS Region or to different AWS Regions.
+
+# Steps:
+
+1)First Install packages on EC2 instance and stop that instance.
+2)Click on Actions => Image Create AMI
+3)Copy AMI to another region(ex: mumbai)To do this edit AMI => Paste Shared User ID
+4)In Mumbai region,create Instance using AMI we copied.While connecting instance root to 
+  be replaced by ubuntu here.Now we will get same EC2 instance with packages & files 
+  installed
+5)Transfer AMI to another user on same region.
+
+=====================================================================================
+
+
+********************* EFS(Elastic File Sharing/System) ***********************************
+
+- It automatically scales up/down computing resources
+- It supports Linux EC2
+- It is based on network file sharing i.e EFS is an NFS file system service offered by AWS
+- You can add/share this storage to multiple EC2 at single time
+- You add/remove capacity without disturbing users & applications.
+- It provides parallel shared access to thousands of Amazon EC2 instances.
+- EFS can serve as a common data source for the instances to access data securely.
+- Its region based.
+
+Disadvantage: 
+
+ - No windows/mac support
+ - No support to system boot volume  (Boot volume is storage of OS)
+
+Use Case:
+
+ - Web serving - shari/storage data to multile sytems
+ - Data Backing 
+
+tip: Booting computer refers to process of powering on computer & starting the OS.
+
+#package of EFS:
+ 
+   - yum install -y amazon-efs-utils          => for amazon linux only
+   
+   - sudo apt install nfs-common -y && \      => ubuntu
+
+
+# Steps to create Amazon EFS:
+  
+  In AWS Console, search for "EFS" in service search box, or you can find it under 
+  "Storage" in "Services" menu.
+
+ 1."Create file system" button to start creating a new EFS file system.
+
+ 2. Configure File System Settings: 
+       - File system settings: Provide a unique name for your EFS file system.
+       - VPC: Choose Virtual Private Cloud (VPC) where you want file system to be created.
+       - Mount targets: It needs mount targets in subnets of your chosen VPC to enable 
+                        access from EC2 instances in that VPC  
+       - Performance mode: Choose between "General Purpose" (default) or "Max I/O" mode 
+                           based on your workload requirements.
+       - Throughput mode: Select "Bursting"(high load) or "Provisioned"(consistent load)
+
+ 3. Configure File System Permissions: Create a new IAM role or choose existing IAM role.
+ 
+ 4. Create EFS File System: Click on "Create file system" button to create EFS file system 
+
+ 5. Install NFS Utilities on EC2 Instances: Create 2 new instances
+
+   # SSH into the first EC2 instance
+   ssh -i your_key.pem ec2-user@instance_ip
+
+   # Install NFS utilities
+   sudo apt-get update
+   sudo apt-get install nfs-common -y
+
+ Repeat the same process for the second EC2 instance.
+
+6.Mount EFS file system on both EC2 instances.
+  
+   # SSH into the first EC2 instance
+   ssh -i your_key.pem ec2-user@instance_ip
+
+   # Create a directory to mount EFS
+   sudo mkdir /mnt/efs
+
+   # Mount the EFS file system 
+   sudo mount -t nfs4 fs-id.efs.region.amazonaws.com:/ /mnt/efs    
+ 
+   # Verify the mount
+   df -h
+
+  In above, Replace fs-id with your EFS file system ID 
+ 
+  Repeat same process for second EC2 instance,use same EFS file system ID and AWS region.
+  
+Usage: Access f1.txt on Both EC2 Instances
+
+Now, you can access and modify f1.txt on both EC2 instances, and changes will be synchronized across both instances.
+
+For example, to create f1.txt and write some content:
+
+  # On the first EC2 instance
+  echo "Hello from Instance 1" | sudo tee /mnt/efs/f1.txt
+
+  # On the second EC2 instance
+  cat /mnt/efs/f1.txt
+
+ Both instances should display content "Hello from Instance 1," as they are sharing same 
+ EFS file system.
+
+=====================================================================================
+
+          EBS and Instance are types of root device.
+          EBS is most used in industry.
+
+*********************** Elastic Block Storage(EBS) *********************************
+
+1. It is persistance storage which means that even if EC2 instances are shut down, 
+   the data on EBS volume is not lost.
+2. It is easy to use and scalable
+3. High Performance
+4. You can resize EBS volume
+5. Objects are stored in block formats i.e one object can have multiple blocks.
+6. EBS is used like a hard drive for EC2 instances.
+
+UseCase:
+ EBS persist data even if instance is deleted (except root volume in default setting). 
+ You can also take point-in-time snapshots and have backup of your data in the EBS volumes.
+
+# SnapShot => Point in time backup. 
+              Its incremental i.e only recent data is backed up.
+
+
+If we have 3 blocks in object in S1 snapshot thre will be 3 objects
+If we add one more block in s2 snapshot we see only newly added block in snapshot
+If we change existing two blocks then it will reflect and stored in s3 snapshot.
+
+# Steps to attach volume to instance:
+  
+  Create EC2 Instance & then in "Elastic Block Store" block on left & click on "Volume"
+
+  1. Create EBS block with required space and requirements
+  2. Attach this volume to EC2 instance we want.
+  3. Create a partition of EBS
+  4. Format partition to file system
+  5. Mount partition to a directory
+  6. Make mount persistant. 
+
+ >> sudo -i 
+ >> lsblk =>
+ >> mkdir /temp/video  =>newly added data stores here
+ >> fdisk -l     => Available disks
+ >> fdisk /dev/xvdf   => creating partition
+ >> fdisk -m	 =>Print the available (FDISK) commands 
+ >> fdisk -n	Add a new partition
+ >> partprobe
+ >> mkfs.xfs /dev/xvdf1
+ >> lsblk -fs
+ >> mount /dev/xvdf1 /tmp/video  => mounting partition
+ >> vim /etc/fstab  => inert "mkfs.xfs /dev/xvdf1  xfs   default 0 0"
+ >> lsblk
+
+===========================================================================================
+
+******************************** Instance Storage *****************************************
+
+- Its also known as Ephermerical Storage
+- Its non-persistent i.e temporary block storage service provided by AWS.
+
+===========================================================================================

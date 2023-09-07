@@ -1,0 +1,113 @@
+Cloud computing is the delivery of computing services via the internet, without installing and maintaining them on-premises.
+
+- It includes servers, storage, databases, networking etc. 
+
+Cloud: It is on-demand availablity of computer sys resources on internet. Cloud provider allows clients to use computing resources without having to purchase or maintain hardware & software.  
+
+It can be used using simple url.
+
+types of clouds: private, public, hybrid clouds & multiclouds.
+
+
+Public Cloud: It's service that owned by CSP & maintains compute resources that customers can access over the internet.
+              It is open to all,to store and access information via the Internet using the pay-per-usage method.
+
+             Ex: AWS,Microsoft Azure(Infra & PaaS),GCP(AI)
+
+         
+         - Low Cost
+         - No Maintenance
+         - Unlimited scalablity => can scale on its own
+         - Better Reliablity => problem free
+
+
+
+Private Cloud: It is cloud computing environment dedicated to a single organization and selected users instead of the general public.
+
+       It is used by organizations to build  manage their own data centers internally or by third party.
+
+
+         - Provides high level security & privacy to data to isolated network
+         - High Performance
+         - More Customization & full control over the cloud 
+
+
+
+Hybrid Cloud: Hybrid cloud is a combination of public and private clouds. 
+      
+               Hybrid cloud = public cloud + private cloud.
+
+           - It is used in finance, healthcare,banking and Universities.
+
+          
+          - Flexible 
+          - Reliable => depends on CSP
+          - More Secure
+
+
+Parameter 	Public Cloud      Private Cloud 	   Hybrid Cloud 
+	
+ Host 	      Service provider 	 Enterprise(3rdparty)    Enterprise (3rd party)	 	
+
+ Users 	      General public 	 Selected users          Selected users 
+
+ Access  	Internet 	 Internet, VPN   	 Internet, VPN 	
+
+ Owner 	     Service provider    Enterprise 	         Enterprise 
+
+===========================================================================================
+
+Cloud Services: IAAS,PAAS,SAAS
+
+=========================================================================================
+
+IIS : Internet Information Service is Microsoft web server that runs on windows OS & used to exchange static/dynamic content with internet users.
+- The servers currently include FTP, SMTP and HTTP/HTTPS.
+- IIS can be used to host, deploy, and manage web applications.
+
+Install IIS steps:
+
+  i)From start menu -> Open Server Manager
+ ii)Click the “Add roles and features” text.
+iii)On the “Before you begin” window, simply click the Next button.
+ iV)On “Select installation type” window, leave “Role-based or feature-based installation” selected and click Next.
+  v)Select server from server pool” with current machine selected & click Next. 
+ vi)Select server roles” window, check box next to “Web Server (IIS)"
+vii)Click next next 
+
+===========================================================================================
+
+AD: Active directory maintain order that is managing users,computers, permissions and file servers.
+
+- It is a database and set of services developed to help you with access,userse management, and permissions for your network resources.
+
+- The company's data is stored as an object in the Active Directory, and it can be in the form of devices, files, users, applications, groups, or shared folders.
+
+- LDAP(Lightweight Directory Access Protocol) for linux.
+
+- We use RDP for Windows
+
+
+AD Groups:
+
+- Groups are very useful for giving or denying privileges to groups of users, rather than having to apply those privileges to each individual user. 
+
+- So we provide access to users using AD group.
+  In every company its practised
+
+Types:
+   **  Global Admin =>Read,Add,Modify & Delete Resources + user/access Mgmt **
+
+        Global Admin =  AD-Cloud-Admin + AD-Cloud-Contributor
+
+    - AD-Cloud-Admin => Add,Modify & Delete Resources
+    - AD-Cloud-Readonly => Read Resources
+    - AD-Cloud-Contributor => Read, Add, modify resources
+
+
+**** Tell Interviewer we dont provide access to users.We are providing access to AD group ****
+
+
+=====================================================================
+
+Lightweight Directory Access Protocol (LDAP) is an internet protocol works on TCP/IP,used to access information from directories.

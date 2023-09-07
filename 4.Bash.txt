@@ -1,0 +1,343 @@
+
+Shell: A UNIX Shell is a program or a command line interpreter that interprets the user commands which are either entered by the user directly or which can be read from a file (i.e. Shell Script) & then pass them to operating system for processing. 
+
+- Types:
+         BASH(Bourne Again Shell) =>  
+                   
+                  - It includes features from Korn and Bourne shell.
+                  - Bash shell is free and open-source to use for computer users.
+
+         Korn Shell(ksh) =>
+                    
+                    - It is superset of Bourne shell & faster than Cshell
+                    - It supports arithmetic,C-like arrays,functions,string-manipulation. 
+                  
+         CShell(csh) => Built in arithmetic and C-like syntax 
+
+
+## BASH: Use of Bash is for system administration, web application deployment, automated backups, creating custom scripts for various pages, etc.
+
+## Shell Script => A shell script is a text file that contains a sequence of commands for a UNIX-based operating system. 
+    
+  - Mainly its used for automation. 
+
+  - File permissions in BASH are r(Read),w(Write) & x(Execute)
+
+  - gedit is a text editor commonly used in Linux-based operating systems. It provides a simple and user-friendly interface for creating and editing text files.
+
+===========================================================================================
+ 
+*******************  Creating Hello bash-script ******************************
+       
+     >> cat script1.sh          -> To view script
+
+          bash_script.sh :                   
+         
+                    #!/bin/bash           -> #!(shebang) - Interpretor or type of shell
+                    # Comment it is       -> Command
+          
+                    echo " Hello World! "   -> echo command to print "Hello World"
+
+
+      >> sh script1.sh
+                            or 
+
+     >> ./script1.sh => TO execute script but gives error as permission is denied
+      
+     >> chmod -R 775 script1.sh 
+              or
+     >> chmod +x script1.sh =>Execute permission to file using chmod cmnd with +x option 
+  
+
+  # set nu => to give line number to schell script in vim
+
+===========================================================================================
+
+*********************  Shell Fundamentals  ***************************
+
+ ## VARIABLES: Its a container to store a value.
+
+           #! /bin/bash  
+
+           # predifined variables
+           echo $HOME		# Home Directory  
+           echo $PWD 		# current working directory   
+	   
+           # User-Defined Variables   
+	   name=Arjun 
+           ROLL_NO=5 
+           readonly ROLL_NO    => readonly means we cant change var value once it is set.
+	   echo "The student name is $name and his Roll number is $ROLL_NO." 
+           echo $name
+           echo name => 
+
+****************************************************************************************
+
+## Using Array in BASH:
+ 
+    - $@ is the default argument which is used to store args (we pass) as an array
+
+    - Display the arguments by defining their array index in the following form:
+       ${variable_name[i]}  
+
+     
+	#!/bin/bash
+
+	# Iterate over a list of items
+	fruits=("Apple" "Banana" "Orange")   
+
+	# Loop through the list
+	for fruit in "${fruits[@]}" 
+        do
+    	    echo "I like $fruit"
+	done
+
+  - Where -a helps script to read an array, and variable_name refers to an array.
+
+    Program:
+	
+        #!/bin/bash  
+  
+	# Reading multiple inputs using an array  
+	echo "Enter names : "  
+	read -a names  
+	echo "The entered names are : ${names[0]}, ${names[1]}."
+
+*****************************************************************************************
+
+## Read User Input: read <variable_name> 
+
+   - If we don't pass any variable with the read command,then we can pass a built-in   variable called REPLY (should be prefixed with the $ sign) while displaying the input. 
+ 
+ #!/bin/bash  
+ # Read the user input   
+  
+ echo "Enter the user name: "  
+ read fname  
+ echo "The Current User Name is $fname"  
+ echo  
+ echo "Enter other users'names: "  
+ read name1 name2 name3  
+ echo "$name1, $name2, $name3 are the other users
+
+ echo "Enter Address:"
+ read 
+ echo "Address: $REPLY"
+
+ # -s allows a user to keep input on silent mode & -p to input on newly command prompt.
+ read -sp "password : " pass_var  
+ echo 
+ echo "password : "  $pass_var  
+  
+**************************************************************************************** 
+
+## ARITHMETIC OPERATIONS: 
+   Double parentheses is easiest mechanism to perform basic arithmetic operations in Bash         
+   We can use this method by using double brackets with or without a leading $.
+
+    syntax: ((expression)) or  'expr $x + $y'
+
+ Program: 
+ 
+  #!/bin/bash  
+ 
+  x=8  
+  y=2  
+  echo "x=8, y=2"  
+  echo "Addition of x & y"  
+  echo $(( $x + $y ))        or  `expr $x + $y`   =>backtick
+  echo "Subtraction of x & y"  
+  echo  `expr $x - $y`  
+  echo "Multiplication of x & y"  
+  echo  `expr $x \* $y` 
+  echo "Division of x by y"  
+  echo  `expr $x / $y `
+  echo "Exponentiation of x,y"  
+  echo  `expr $x ** $y `  
+  echo "Modular Division of x,y"  
+  echo  $(( $x % $y ))  
+  echo "Incrementing x by 5, then x= "  
+  (( x += 5 ))   
+  echo $x  
+  echo "Decrementing x by 5, then x= "  
+  (( x -= 5 ))  
+  echo $x  
+  echo "Multiply of x by 5, then x="  
+  (( x *= 5 ))  
+  echo $x  
+  echo "Dividing x by 5, x= "  
+  (( x /= 5 ))  
+  echo $x  
+  echo "Remainder of Dividing x by 5, x="  
+  (( x %= 5 ))  
+  echo $x  
+
+
+## Relational Expressions:
+     
+   equal =>    [$a -eq $b]
+   notEqual => [$a -ne $b]
+   Greater =>  [$a -gt $b] 
+   LessThan => [$a -lt $b]
+
+## Boolean Expressions:
+    
+    negation => ! =>[!true] it give false
+    OR => -o => [$a -lt 20 -o $b -gt 100] is true
+    AND => -a => [$a -lt 20 -a $b -gt 100] 
+      
+## String Operators:
+ 
+    a = abc & b =def
+
+    [$a = $b] => = checks value
+
+    [$a != $b] => != equal or not
+ 
+    [ -z $a ] => -z Checks if given string size is zero
+    
+    [-n $a] => -n Checks if given string size is non-zero;
+    
+    [str $a] => str Checks if str is not the empty string;
+   
+ 
+## File Test Operators
+
+
+===========================================================================================
+ 
+Types of Variables:
+ 
+  i) Local Variable: 
+          
+          - Its scope is limited to current shell.
+          - Limited to only script. 
+
+       ex: a=10
+           b=20 
+           func(){ echo `expr $a +$b`}
+
+ ii) Enviroment variable: 
+
+      - It specifies the directories to be searched to find a command. 
+      - Environment var in Linux can have global
+
+      ex: $PATH => Current sytem path
+          $NAME => Display any ENV
+          $HOME => path of home directory.
+
+     - To set a global ENV  
+  
+       $ export NAME=Value
+             or
+       $ set NAME=Value
+       
+       ex:  export var  = destination        
+            export JDK_HOME = bin/jdk 
+
+
+     - To display Linux Envs:
+         
+        $ printenv //displays all the global ENVs
+                     or
+        $ set //display all the ENVs(global as well as local)
+                      or
+        $ env //display all the global ENVs
+
+
+iii) Shell variables:
+
+========================================================================================
+
+$? = returns 0 if previous command runs successfully
+$$ = Stores process ID for your bash session.
+$0 = Script name.
+$1 .. $9 = Arguments passed to the script.
+$# = Count the length of values i.e args
+$@ = Stores array of all values.
+
+ >> ./Script.sh aws devops
+  $0 => script name
+  $1 => aws
+  $2 => devops
+
+=================================================================================================
+
+   ***************************** Decision Making **********************************   
+  
+## IF ELIF ELSE statement: 
+     
+     if [ expression ];  
+     then  
+     statements  
+     fi 
+
+  -lt (less than) , -gt(greater than) 
+
+  example:
+
+  	#!/bin/bash  
+
+	read -p "Enter a number of quantity:" num  
+  
+	if [ $num -gt 100 ];  
+	then  
+	   echo "Eligible for 10% discount"  
+
+	elif [ $num -lt 100 ];  
+	then  
+	   echo "Eligible for 5% discount"  
+	else  
+	   echo "Lucky Draw Winner"  
+	echo "Eligible to get the item for free"  
+
+	fi  
+
+- FOR : 
+   
+ Numeric ranges for syntax:
+     for VARIABLE in 1 2 3 4 5 .. N
+     do
+        command1
+        command2
+        commandN
+     done
+
+ {START..END..INCREMENT} syntax:
+     #!/bin/bash
+     echo "Bash version ${BASH_VERSION}..."
+     for i in {0..10..2}
+     do
+        echo "Welcome $i times"
+     done
+
+ Ex:
+     # Install the PHP packages listed in the PKGS variable.
+      PKGS="php7-openssl-7.3  php7-common-7.3  php7-fpm-7.3  php7-opcache-7.3"
+      for p in $PKGS
+      do
+         echo "Installing $p package"
+         sudo apk add "$p"
+      done
+
+- LOOPS:
+       a=0
+       while [exp]
+       do
+         lines of code..
+       done
+
+===================================================================================
+ 
+Function calling: 
+         
+           fName(){
+             echo "Hello"
+             fName2       
+           }
+           fName2{
+             echo "World"
+           }
+           fName
+
+===================================================================================
