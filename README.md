@@ -1,6 +1,8 @@
-Ubuntu 22.04-Java - https://phoenixnap.com/kb/install-jenkins-ubuntu
+## Installation Reference for followings: 
 
-Ubuntu 22.04 -Jenkins - https://www.jenkins.io/doc/book/installing/linux/ 
+Ubuntu 22.04- ###Java - https://phoenixnap.com/kb/install-jenkins-ubuntu
+
+Ubuntu 22.04 - ###Jenkins - https://www.jenkins.io/doc/book/installing/linux/ 
 
 Jenkins installtion - https://www.jenkins.io/doc/book/installing/linux/
 
