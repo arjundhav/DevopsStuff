@@ -1,4 +1,4 @@
-<a href="https://phoenixnap.com/kb/install-jenkins-ubuntu">Ubuntu 22.04-Java</a>
+Ubuntu 22.04-Java - https://phoenixnap.com/kb/install-jenkins-ubuntu
 
 Ubuntu 22.04 -Jenkins - https://www.jenkins.io/doc/book/installing/linux/ 
 
